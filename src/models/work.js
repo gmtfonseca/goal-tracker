@@ -24,4 +24,4 @@ const workSchema = new Schema({
   ],
 })
 
-module.exports = mongoose.model('work', workSchema)
+module.exports = mongoose.model('Work', workSchema)

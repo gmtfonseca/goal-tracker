@@ -1,17 +1,9 @@
-const express = require('express')
-const app = express()
+const server = require('./server')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-
-app.use(bodyParser.json())
-
-connectToDb()
-
-app.use(require('./routes'))
 
 async function connectToDb() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/goaltracker', {
+    await mongoose.connect('mongodb://localhost:27017/goal-tracker', {
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
@@ -24,8 +16,10 @@ async function connectToDb() {
   }
 }
 
+connectToDb()
+
 const port = process.env.PORT || 3000
-app.listen(port, err => {
+server.listen(port, err => {
   if (err) throw err
 
   console.log(`Server listening to port ${port}`)
