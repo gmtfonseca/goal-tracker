@@ -8,7 +8,8 @@ module.exports = {
   },
 
   async getById(req, res) {
-    return res.status(HttpStatus.OK).json({})
+    const goal = await Goal.findById(req.params.goalId)
+    return res.status(HttpStatus.OK).json(goal)
   },
 
   async post(req, res) {
@@ -19,10 +20,18 @@ module.exports = {
   },
 
   async put(req, res) {
-    return res.status(HttpStatus.OK).json({})
+    const goal = await Goal.findByIdAndUpdate(
+      req.params.goalId,
+      {
+        ...req.body,
+      },
+      { new: true }
+    )
+    return res.status(HttpStatus.OK).json(goal)
   },
 
   async delete(req, res) {
-    return res.status(HttpStatus.OK).json({})
+    const goal = await Goal.findByIdAndDelete(req.params.goalId)
+    return res.status(HttpStatus.OK).json(goal)
   },
 }
