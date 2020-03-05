@@ -2,7 +2,7 @@ const HttpStatus = require('http-status-codes')
 const app = require('../src/server')
 const supertest = require('supertest')
 const request = supertest(app)
-const { factory } = require('./util/factory')
+const factory = require('./util/factory')
 const fakers = require('./util/fakers')
 const db = require('./util/db')
 
@@ -25,13 +25,14 @@ describe('POST /', () => {
 
 describe('GET /', () => {
   test('should return goals', async () => {
-    await factory.createMany('Goal', 3)
+    const docNumber = 3
+    await factory.createMany('Goal', docNumber)
     const res = await request
       .get('/api/goal')
       .expect('Content-Type', /json/)
       .expect(HttpStatus.OK)
 
-    expect(res.body).toHaveLength(3)
+    expect(res.body).toHaveLength(docNumber)
   })
 })
 
