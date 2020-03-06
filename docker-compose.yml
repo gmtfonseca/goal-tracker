@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app-server:
+    container_name: goaltracker-server
+    build: .
+    image: gmtfonseca/goaltracker-server
+    ports:
+      - '3000:3000'
+    depends_on:
+      - app-db
+    environment:
+      DB_DEV_URL: "mongodb://app-db:27017/goaltracker"
+  app-db:
+    container_name: goaltracker-db
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo/goaltracker:/data/db/
