@@ -29,4 +29,11 @@ module.exports = {
   randomDocId() {
     return mongoose.Types.ObjectId()
   },
+  toJsonComparable(models) {
+    return models.map(model => {
+      const doc = Object.assign({}, model._doc)
+      doc._id = doc._id.toString()
+      return doc
+    })
+  },
 }

@@ -3,14 +3,13 @@ const app = require('../src/server')
 const supertest = require('supertest')
 const request = supertest(app)
 const factory = require('./util/factory')
-const fakers = require('./util/fakers')
 const db = require('./util/db')
 
 db.setupHooks('goal')
 
 describe('POST /', () => {
-  test('should return new goal', async () => {
-    const goal = fakers.goal()
+  test('should create goal', async () => {
+    const goal = await factory.attrs('Goal')
     const res = await request
       .post('/api/goal')
       .send(goal)
@@ -26,13 +25,14 @@ describe('POST /', () => {
 describe('GET /', () => {
   test('should return goals', async () => {
     const docNumber = 3
-    await factory.createMany('Goal', docNumber)
+    const goals = await factory.createMany('Goal', docNumber)
     const res = await request
       .get('/api/goal')
       .expect('Content-Type', /json/)
       .expect(HttpStatus.OK)
 
     expect(res.body).toHaveLength(docNumber)
+    expect(res.body).toEqual(db.toJsonComparable(goals))
   })
 })
 
@@ -53,7 +53,7 @@ describe('GET BY ID /', () => {
 describe('PUT /', () => {
   test('should update goal', async () => {
     const originalGoal = await factory.create('Goal')
-    const updatedGoal = fakers.goal()
+    const updatedGoal = await factory.attrs('Goal')
     const res = await request
       .put(`/api/goal/${originalGoal.id}`)
       .send(updatedGoal)

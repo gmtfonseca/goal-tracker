@@ -12,7 +12,7 @@ db.setupHooks('work')
 describe('POST /', () => {
   test('should create work', async () => {
     const goal = await factory.create('Goal')
-    const work = fakers.work()
+    const work = await factory.attrs('Work')
     const res = await request
       .post(`/api/goal/${goal.id}/work`)
       .send(work)
@@ -27,7 +27,7 @@ describe('POST /', () => {
 
   test('should not create work with invalid goal', async () => {
     const invalidGoalId = db.randomDocId()
-    const work = fakers.work()
+    const work = await factory.attrs('Work')
     const res = await request
       .post(`/api/goal/${invalidGoalId}/work`)
       .send(work)

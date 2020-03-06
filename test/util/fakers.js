@@ -19,4 +19,4 @@ const work = () => ({
   tasks: new Array(randInt(1, 5)).fill(null).map(e => task()),
 })
 
-module.exports = { goal, work }
+module.exports = { goal, task, work }
