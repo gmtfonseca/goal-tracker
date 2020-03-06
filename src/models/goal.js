@@ -5,11 +5,11 @@ const { Schema } = mongoose
 const goalSchema = new Schema({
   year: {
     type: Number,
-    required: true,
+    required: [true, 'Year is required'],
   },
   title: {
     type: String,
-    required: true,
+    required: [true, 'Title is required'],
   },
   overview: {
     type: String,

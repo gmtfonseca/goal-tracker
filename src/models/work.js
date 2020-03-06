@@ -5,18 +5,18 @@ const { Schema } = mongoose
 const workSchema = new Schema({
   goal: {
     type: Schema.Types.ObjectId,
-    ref: 'goal',
-    required: true,
+    ref: 'Goal',
+    required: [true, 'Goal is required'],
   },
   date: {
     type: Date,
-    required: true,
+    required: [true, 'Date is required'],
   },
   tasks: [
     {
       description: {
         type: String,
-        required: true,
+        required: [true, 'Description is required'],
       },
       notes: String,
       done: Boolean,

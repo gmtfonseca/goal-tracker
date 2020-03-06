@@ -26,4 +26,7 @@ module.exports = {
         await mongoose.connection.close()
       })
   },
+  randomDocId() {
+    return mongoose.Types.ObjectId()
+  },
 }
