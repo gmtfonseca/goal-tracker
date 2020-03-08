@@ -3,7 +3,6 @@ const app = require('../src/server')
 const supertest = require('supertest')
 const request = supertest(app)
 const factory = require('./util/factory')
-const fakers = require('./util/fakers')
 const db = require('./util/db')
 const { withoutKey } = require('../src/lib/object')
 
@@ -110,7 +109,7 @@ describe('PUT /', () => {
     originalWork = await factory.create('Work', {
       goal: goal.id,
     })
-    updatedWork = fakers.work()
+    updatedWork = await factory.attrs('Work')
   })
 
   test('should update work', async () => {
