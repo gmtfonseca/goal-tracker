@@ -39,7 +39,7 @@ describe('POST /', () => {
 })
 
 describe('PUT', () => {
-  test('should update work', async () => {
+  test('should update task', async () => {
     const goal = await factory.create('Goal')
     const work = await factory.create('Work', {
       goal: goal.id,
