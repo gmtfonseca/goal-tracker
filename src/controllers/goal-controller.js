@@ -1,4 +1,4 @@
-const Goal = require('../models/Goal.js')
+const Goal = require('../models/Goal')
 const HttpStatus = require('http-status-codes')
 
 module.exports = {

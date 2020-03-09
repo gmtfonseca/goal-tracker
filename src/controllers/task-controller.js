@@ -1,4 +1,4 @@
-const Work = require('../models/Work.js')
+const Work = require('../models/Work')
 const HttpStatus = require('http-status-codes')
 
 module.exports = {
