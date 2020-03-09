@@ -4,7 +4,8 @@ const HttpStatus = require('http-status-codes')
 module.exports = {
   async get(req, res) {
     const goals = await Goal.find()
-    return res.status(HttpStatus.OK).json(goals)
+    // return res.status(HttpStatus.OK).json(goals)
+    return res.status(HttpStatus.OK).json({})
   },
 
   async getById(req, res) {
