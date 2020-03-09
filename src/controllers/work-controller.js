@@ -1,4 +1,4 @@
-const Work = require('../models/Work')
+const Work = require('../models/Work.js')
 
 const HttpStatus = require('http-status-codes')
 
