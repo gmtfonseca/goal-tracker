@@ -8,8 +8,8 @@ module.exports = {
   },
 
   async getById(req, res) {
-    const goal = await Goal.findById(req.params.goalId)
-    return res.status(HttpStatus.OK).json(goal)
+    // const goal = await Goal.findById(req.params.goalId)
+    return res.status(HttpStatus.OK).json({})
   },
 
   async post(req, res) {
