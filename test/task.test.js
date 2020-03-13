@@ -38,7 +38,7 @@ describe('POST /', () => {
 })
 
 describe('PUT', () => {
-  test('should update work', async () => {
+  test('should update task', async () => {
     const goal = await factory.create('Goal')
     const work = await factory.create('Work', {
       goal: goal.id,
@@ -54,6 +54,22 @@ describe('PUT', () => {
     expect(res.body).toHaveProperty('goal', goal.id)
     expect(res.body.tasks).toEqual(expect.arrayContaining([expect.objectContaining(updatedTask)]))
   })
+
+  test('should not update task with invalid work', async () => {
+    const goal = await factory.create('Goal')
+    const work = await factory.create('Work', {
+      goal: goal.id,
+    })
+    const firstTask = work.tasks[0]
+    const updatedTask = fakers.task()
+    const invalidWorkId = db.randomDocId()
+    const res = await request
+      .put(`/api/goal/${work.goal}/work/${invalidWorkId}/task/${firstTask.id}`)
+      .send(updatedTask)
+      .expect(HttpStatus.BAD_REQUEST)
+
+    expect(res.body).toHaveProperty('error')
+  })
 })
 
 describe('DELETE /', () => {
@@ -68,5 +84,17 @@ describe('DELETE /', () => {
     expect(res.body).toHaveProperty('_id', work.id)
     expect(res.body).toHaveProperty('goal', goal.id)
     expect(res.body.tasks).not.toEqual(expect.arrayContaining([expect.objectContaining(firstTask)]))
+  })
+
+  test('should not delete task with invalid goal', async () => {
+    const goal = await factory.create('Goal')
+    const work = await factory.create('Work', { goal: goal.id })
+    const firstTask = work.tasks[0]
+    const invalidWorkId = db.randomDocId()
+    const res = await request
+      .delete(`/api/goal/${goal.id}/work/${invalidWorkId}/task/${firstTask.id}`)
+      .expect(HttpStatus.BAD_REQUEST)
+
+    expect(res.body).toHaveProperty('error')
   })
 })

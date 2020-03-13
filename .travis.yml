@@ -1,0 +1,6 @@
+language: node_js
+node_js: 
+  - "stable"
+services: mongodb
+env:
+  - DB_URL=mongodb://localhost:27017/goaltracker
