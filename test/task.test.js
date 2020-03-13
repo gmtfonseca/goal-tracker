@@ -24,6 +24,17 @@ describe('POST /', () => {
     expect(res.body).toHaveProperty('goal', goal.id)
     expect(res.body.tasks).toEqual(expect.arrayContaining([expect.objectContaining(task)]))
   })
+
+  test('should not create task with invalid work', async () => {
+    const invalidGoalId = db.randomDocId()
+    const work = await factory.attrs('Work')
+    const res = await request
+      .post(`/api/goal/${invalidGoalId}/work`)
+      .send(work)
+      .expect(HttpStatus.BAD_REQUEST)
+
+    expect(res.body).toHaveProperty('error')
+  })
 })
 
 describe('PUT', () => {
