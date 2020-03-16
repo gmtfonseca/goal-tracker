@@ -14,6 +14,7 @@ Since this is supposed to be a template for REST APIs, I included some of the mo
 - [mongoose](https://github.com/Automattic/mongoose): MongoDB object modeling designed to work in an asynchronous environment
 - [express-async-handler](https://www.npmjs.com/package/express-async-handler): Simple middleware for handling exceptions inside of async express routes
 - [winston](https://github.com/winstonjs/winston): A logger for just about everything
+- [jest](https://github.com/facebook/jest): Delightful JavaScript Testing
 
 Check the package.json file for more details and also my dev dependencies.
 
